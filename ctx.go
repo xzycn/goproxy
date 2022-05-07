@@ -2,6 +2,7 @@ package goproxy
 
 import (
 	"crypto/tls"
+	"net"
 	"net/http"
 	"regexp"
 )
@@ -12,7 +13,8 @@ type ProxyCtx struct {
 	// Will contain the client request from the proxy
 	Req *http.Request
 	// Will contain the remote server's response (if available. nil if the request wasn't send yet)
-	Resp         *http.Response
+	Resp *http.Response
+	// Can be used to override the RoundTripper for a single request
 	RoundTripper RoundTripper
 	// will contain the recent error that occurred while trying to send receive or parse traffic
 	Error error
@@ -23,6 +25,8 @@ type ProxyCtx struct {
 	Session   int64
 	certStore CertStorage
 	Proxy     *ProxyHttpServer
+	// Can be used to override the ConnectDial for a single request
+	ConnectDial func(network, addr string) (net.Conn, error)
 }
 
 type RoundTripper interface {

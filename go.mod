@@ -1,3 +1,12 @@
-module github.com/elazarl/goproxy
+module github.com/xzycn/goproxy
 
-require github.com/elazarl/goproxy/ext v0.0.0-20190711103511-473e67f1d7d2
+go 1.17
+
+require (
+	github.com/elazarl/goproxy v0.0.0-20220417044921-416226498f94
+	github.com/elazarl/goproxy/ext v0.0.0-20220417044921-416226498f94
+)
+
+replace (
+	github.com/elazarl/goproxy latest => github.com/xzycn/goproxy latest
+)
